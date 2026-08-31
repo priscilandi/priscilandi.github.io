@@ -6,7 +6,7 @@ Personal Computer Science and AI portfolio website for Priscilla Landi — CS st
 
 This site showcases my experience in applied AI research, machine learning, backend and full-stack development, and competitive tennis. It includes my work history, research projects with GitHub links, certifications, and a photo gallery.
 
-**Live site:** [priscilandi.github.io/portfolio](https://priscilandi.github.io/portfolio)
+**Live site:** [https://priscilandi.github.io](https://priscilandi.github.io)
 
 ## Technologies
 
