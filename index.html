@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priscilla Landi — Portfolio</title>
+  <!-- Google Fonts: loads when online, falls back to system fonts offline -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+/* ============================================================
+   PRISCILLA LANDI — PORTFOLIO
+   Works offline / file:// with no server required
+   Palette: deep navy · off-white · warm gold
+   Type: System serif display + System sans body (+ Google Fonts if online)
+   ============================================================ */
+
+/* Import Google Fonts — gracefully degrades when offline/file:// */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --navy:   #0f1f38;
+  --navy-2: #162a4a;
+  --navy-3: #1e3a5f;
+  --gold:   #c9a84c;
+  --gold-2: #e8c97a;
+  --white:  #f8f6f1;
+  --grey:   #8a9ab5;
+  --text:   #e8eaf0;
+
+  /* Font stacks — DM Serif Display with excellent fallbacks */
+  --font-display: 'DM Serif Display', 'Georgia', 'Times New Roman', serif;
+  --font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  --radius: 10px;
+  --ease:   cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --max-w:  1100px;
+}
+
+/* ── RESET ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--navy);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+
+/* Remove all list styling globally so bullet-list issue can't happen */
+ul { list-style: none; padding: 0; margin: 0; }
+
+code {
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.83em;
+  background: rgba(201,168,76,0.15);
+  color: var(--gold-2);
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--navy-3); border-radius: 3px; }
+
+/* ── LAYOUT ─────────────────────────────────────────────────── */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+.section { padding: 6rem 0; }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+  line-height: 1.15;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; left: 0;
+  width: 36px; height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  border-radius: 40px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background 0.22s var(--ease), border-color 0.22s var(--ease),
+              color 0.22s var(--ease), transform 0.2s var(--ease);
+  text-decoration: none;
+}
+.btn--primary {
+  background: var(--gold);
+  color: var(--navy);
+  border-color: var(--gold);
+}
+.btn--primary:hover { background: var(--gold-2); border-color: var(--gold-2); transform: translateY(-2px); }
+.btn--ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(248,246,241,0.28);
+}
+.btn--ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+/* ── NAV ─────────────────────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.5rem;
+  background: rgba(15, 31, 56, 0.92);
+  -webkit-backdrop-filter: blur(14px);
+          backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  transition: padding 0.25s var(--ease);
+}
+.nav.scrolled { padding: 0.8rem 2.5rem; }
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.nav__links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  list-style: none;
+}
+.nav__links li { list-style: none; }
+.nav__links a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--grey);
+  transition: color 0.2s ease;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid transparent;
+}
+.nav__links a:hover { color: var(--white); border-bottom-color: var(--gold); }
+
+.nav__cta {
+  background: var(--gold) !important;
+  color: var(--navy) !important;
+  padding: 0.4rem 1.1rem !important;
+  border-radius: 30px;
+  border-bottom: none !important;
+  font-weight: 600 !important;
+  transition: background 0.2s ease, transform 0.2s ease !important;
+}
+.nav__cta:hover { background: var(--gold-2) !important; transform: translateY(-1px); }
+
+/* Burger — hidden on desktop */
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.nav__burger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* Mobile overlay menu — HIDDEN by default (critical fix) */
+.mobile-menu {
+  display: none; /* JS adds .open to show it */
+  position: fixed;
+  inset: 0;
+  background: var(--navy);
+  z-index: 99;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.mobile-menu.open { display: flex; }
+
+.mobile-menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+  list-style: none;
+}
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--white);
+  transition: color 0.2s ease;
+}
+.mobile-menu a:hover { color: var(--gold); }
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 2rem 5rem;
+  background: var(--navy);
+}
+
+/* Rich background without external resources */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 75% at 72% 48%, rgba(30,58,95,0.7) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 40% at 8%  85%, rgba(201,168,76,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 60% at 50% 0%,  rgba(22,42,74,0.5) 0%, transparent 60%);
+  pointer-events: none;
+}
+/* Grid pattern */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  padding-left: max(0px, calc((100vw - var(--max-w)) / 2));
+}
+
+.hero__eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 10vw, 7.5rem);
+  font-weight: 400;
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: 1.6rem;
+}
+.hero__name em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero__sub {
+  max-width: 52ch;
+  color: var(--grey);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+.hero__subsub {
+  max-width: 52ch;
+  color: var(--gold);
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  margin-top: -1.6rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.85;
+}
+.hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* Scroll cue */
+.hero__scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--grey);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+.hero__scroll-line {
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, var(--gold) 0%, transparent 100%);
+  animation: scrollLine 1.9s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0%, 100% { opacity: 0.35; transform: scaleY(0.7) translateY(-6px); }
+  50%       { opacity: 1;    transform: scaleY(1)   translateY(0); }
+}
+
+/* ── ABOUT ──────────────────────────────────────────────────── */
+.about { background: var(--navy-2); }
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about__text .section-title { margin-bottom: 1.8rem; }
+
+.about__text p {
+  color: rgba(232,234,240,0.82);
+  font-size: 0.95rem;
+  margin-bottom: 1.1rem;
+  max-width: 58ch;
+}
+
+.about__skills { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.4rem; }
+
+.skill-group h4 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.skill-tags span {
+  background: rgba(201,168,76,0.09);
+  border: 1px solid rgba(201,168,76,0.22);
+  color: var(--text);
+  padding: 0.28rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Sidebar stats */
+.about__stat-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.stat {
+  background: var(--navy-3);
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: var(--radius);
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.stat__num {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat__label {
+  font-size: 0.75rem;
+  color: var(--grey);
+  line-height: 1.35;
+}
+
+.about__edu h4 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.edu-card {
+  background: var(--navy-3);
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.3rem;
+}
+.edu-card strong { color: var(--white); font-size: 0.93rem; display: block; margin-bottom: 0.2rem; }
+.edu-card p { color: rgba(232,234,240,0.72); font-size: 0.86rem; margin-bottom: 0.4rem; }
+.edu-card span { color: var(--grey); font-size: 0.78rem; }
+
+/* ── EXPERIENCE / TIMELINE ───────────────────────────────────── */
+.experience { background: var(--navy); }
+
+.timeline {
+  position: relative;
+  padding-left: 2.2rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px; top: 6px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold) 0%, rgba(201,168,76,0.1) 100%);
+}
+
+.timeline__item {
+  position: relative;
+  margin-bottom: 2.8rem;
+}
+.timeline__item:last-child { margin-bottom: 0; }
+
+.timeline__marker {
+  position: absolute;
+  left: -2.45rem;
+  top: 0.5rem;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--navy);
+  box-shadow: 0 0 0 2px var(--gold);
+}
+
+.timeline__date {
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+.timeline__card {
+  background: var(--navy-2);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.9rem;
+  transition: border-color 0.22s ease;
+}
+.timeline__card:hover { border-color: rgba(201,168,76,0.32); }
+
+.timeline__header { margin-bottom: 1rem; }
+.timeline__header h3 {
+  font-family: var(--font-display);
+  font-size: 1.22rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 0.25rem;
+}
+.timeline__org {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--grey);
+  margin-bottom: 0.1rem;
+}
+.timeline__location {
+  font-size: 0.76rem;
+  color: rgba(138,154,181,0.55);
+}
+
+/* Bullet list inside timeline only */
+.timeline__card > ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+}
+.timeline__card > ul li {
+  font-size: 0.875rem;
+  color: rgba(232,234,240,0.78);
+  line-height: 1.62;
+}
+
+.timeline__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+.timeline__tags span {
+  background: rgba(201,168,76,0.07);
+  border: 1px solid rgba(201,168,76,0.18);
+  color: var(--gold-2);
+  font-size: 0.73rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+}
+
+/* ── PROJECTS ────────────────────────────────────────────────── */
+.projects { background: var(--navy-2); }
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+
+.project-card {
+  background: var(--navy);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.24s var(--ease), border-color 0.24s ease, box-shadow 0.24s ease;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(201,168,76,0.38);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.28);
+}
+.project-card__accent {
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-2) 100%);
+}
+.project-card__body { padding: 1.6rem; flex: 1; }
+.project-card__date {
+  display: block;
+  font-size: 0.73rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+}
+.project-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+.project-card p {
+  font-size: 0.865rem;
+  color: rgba(232,234,240,0.75);
+  line-height: 1.65;
+  margin-bottom: 1.1rem;
+}
+.project-card p strong { color: var(--gold-2); font-weight: 600; }
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+}
+.project-card__tags span {
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.18);
+  color: var(--gold-2);
+  font-size: 0.72rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 10px;
+}
+.project-card__links {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  border: 1px solid transparent;
+}
+.project-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.project-btn--gh {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.15);
+  color: var(--text);
+}
+.project-btn--gh:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-1px);
+}
+.project-btn--demo {
+  background: rgba(201,168,76,0.12);
+  border-color: rgba(201,168,76,0.3);
+  color: var(--gold-2);
+}
+.project-btn--demo:hover {
+  background: rgba(201,168,76,0.22);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+/* ── GALLERY ─────────────────────────────────────────────────── */
+.gallery { background: var(--navy); }
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 240px;
+  gap: 0.9rem;
+}
+
+.gallery__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  cursor: pointer;
+  background: var(--navy-2);
+}
+.gallery__item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease);
+}
+.gallery__item:hover img { transform: scale(1.06); }
+
+.gallery__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(15,31,56,0.92) 0%, rgba(15,31,56,0.2) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem 1.1rem;
+}
+.gallery__item:hover .gallery__overlay { opacity: 1; }
+.gallery__overlay p {
+  font-size: 0.8rem;
+  color: var(--white);
+  line-height: 1.4;
+}
+
+.gallery__item--wide { grid-column: span 2; }
+.gallery__item--cert {
+  background: #fff;
+}
+.gallery__item--cert img {
+  object-fit: contain;
+  padding: 0.75rem;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(8,16,28,0.97);
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.open { display: flex; }
+.lightbox__content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.lightbox__content img {
+  max-height: 80vh;
+  max-width: 88vw;
+  border-radius: 8px;
+  object-fit: contain;
+}
+.lightbox__content p {
+  color: var(--grey);
+  font-size: 0.85rem;
+  text-align: center;
+}
+.lightbox__close,
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.28);
+  color: var(--white);
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+.lightbox__close:hover,
+.lightbox__prev:hover,
+.lightbox__next:hover { background: rgba(201,168,76,0.3); }
+.lightbox__close { top: 1.2rem; right: 1.2rem; font-size: 1.5rem; }
+.lightbox__prev { left: 1.2rem; top: 50%; transform: translateY(-50%); }
+.lightbox__next { right: 1.2rem; top: 50%; transform: translateY(-50%); }
+
+/* ── AWARDS ──────────────────────────────────────────────────── */
+.awards { background: var(--navy-2); }
+
+.awards__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.1rem;
+}
+.award-card {
+  background: var(--navy);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color 0.22s ease, transform 0.22s ease;
+}
+.award-card:hover { border-color: rgba(201,168,76,0.33); transform: translateY(-3px); }
+.award-card__icon { font-size: 1.7rem; margin-bottom: 0.75rem; }
+.award-card h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 0.45rem;
+  line-height: 1.3;
+}
+.award-card p { font-size: 0.83rem; color: var(--grey); line-height: 1.55; }
+
+/* ── CONTACT ─────────────────────────────────────────────────── */
+.contact { background: var(--navy); }
+.contact__inner { max-width: 640px; }
+.contact__sub {
+  color: rgba(232,234,240,0.75);
+  font-size: 0.97rem;
+  margin-bottom: 2.4rem;
+  max-width: 48ch;
+}
+
+.contact__links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+.contact__link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.94rem;
+  color: var(--text);
+  transition: color 0.2s ease;
+  width: fit-content;
+}
+.contact__link svg { width: 19px; height: 19px; color: var(--gold); flex-shrink: 0; }
+.contact__link:hover { color: var(--gold); }
+.contact__location { color: var(--grey); font-size: 0.85rem; }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+.footer {
+  background: var(--navy-2);
+  border-top: 1px solid rgba(201,168,76,0.08);
+  padding: 1.4rem 0;
+}
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--grey);
+}
+
+/* ── SCROLL REVEAL ────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.48s var(--ease), transform 0.48s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .about__grid { grid-template-columns: 1fr; }
+  .about__stat-block { grid-template-columns: repeat(2, 1fr); }
+  .about__text p { max-width: none; }
+  .projects__grid { grid-template-columns: 1fr 1fr; }
+  .gallery__grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; }
+  .gallery__item--wide { grid-column: span 2; }
+}
+
+@media (max-width: 640px) {
+  .nav__links { display: none !important; }
+  .nav__burger { display: flex !important; }
+  .section { padding: 4rem 0; }
+  .hero { padding: 7rem 1.5rem 4rem; }
+  .hero__content { padding-left: 0; }
+  .projects__grid { grid-template-columns: 1fr; }
+  .gallery__grid { grid-template-columns: 1fr; grid-auto-rows: 210px; }
+  .gallery__item--wide { grid-column: span 1; }
+  .footer__inner { flex-direction: column; gap: 0.4rem; text-align: center; }
+  .timeline { padding-left: 1.6rem; }
+  .timeline__marker { left: -1.9rem; }
+  .timeline__card { padding: 1.1rem 1.2rem; }
+  .lightbox__prev { left: 0.4rem; }
+  .lightbox__next { right: 0.4rem; }
+  .nav { padding: 1rem 1.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a class="nav__logo" href="#hero">PL</a>
+    <ul class="nav__links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact" class="nav__cta">Contact</a></li>
+    </ul>
+    <button class="nav__burger" aria-label="Toggle menu" aria-expanded="false" id="burger">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#about"      class="mobile-link">About</a></li>
+      <li><a href="#experience" class="mobile-link">Experience</a></li>
+      <li><a href="#projects"   class="mobile-link">Projects</a></li>
+      <li><a href="#gallery"    class="mobile-link">Gallery</a></li>
+      <li><a href="#contact"    class="mobile-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Computer Science &middot; AI Research &middot; Tennis</p>
+      <h1 class="hero__name">Priscilla<br><em>Landi</em></h1>
+      <p class="hero__sub">Computer Science student building intelligent systems that connect AI research with real-world applications.</p>
+      <p class="hero__subsub">Experience across applied AI research, machine learning, backend development, and full-stack applications.</p>
+      <div class="hero__actions">
+        <a href="#experience" class="btn btn--primary">View My Work</a>
+        <a href="#contact"    class="btn btn--ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="container about__grid">
+      <div class="about__text">
+        <h2 class="section-title">About</h2>
+        <p>I&rsquo;m a Computer Science student at Augusta University with experience spanning AI research, application development, and IT operations. My technical interests center on machine learning, Edge AI, and building systems that are both rigorous and practical &mdash; from Spiking Neural Networks to full-stack web applications.</p>
+        <p>Outside the lab, I compete on the Augusta University Women&rsquo;s Tennis Team, where I&rsquo;ve earned the MVP award three consecutive years. The same drive that fuels long training sessions on court carries over to how I approach research and engineering challenges.</p>
+        <p>Originally from Argentina, I bring a multilingual perspective and a background in high-level competitive tennis that took me through national and international tournaments before coming to the U.S. for school.</p>
+        <div class="about__skills">
+          <div class="skill-group">
+            <h4>Programming</h4>
+            <div class="skill-tags">
+              <span>Python</span><span>C#</span><span>JavaScript</span><span>SQL</span><span>HTML</span><span>CSS</span><span>PHP</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>ML / AI</h4>
+            <div class="skill-tags">
+              <span>PyTorch</span><span>spikingjelly</span><span>torchvision</span><span>scikit-learn</span><span>OpenCV</span><span>NumPy</span><span>pandas</span><span>Matplotlib</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Tools &amp; Systems</h4>
+            <div class="skill-tags">
+              <span>Linux (Ubuntu)</span><span>Git</span><span>Conda</span><span>CUDA</span><span>VS Code</span><span>SSH</span><span>Nginx</span><span>YAML</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Languages</h4>
+            <div class="skill-tags">
+              <span>English</span><span>Spanish</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about__sidebar">
+        <div class="about__stat-block">
+          <div class="stat">
+            <span class="stat__num">3&times;</span>
+            <span class="stat__label">Tennis MVP</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">Top&nbsp;20</span>
+            <span class="stat__label">Junior National Ranking &mdash; Argentina</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">96.5%</span>
+            <span class="stat__label">Gesture Detector Accuracy</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">3</span>
+            <span class="stat__label">Kaggle Certifications</span>
+          </div>
+        </div>
+        <div class="about__edu">
+          <h4>Education</h4>
+          <div class="edu-card">
+            <strong>Augusta University</strong>
+            <p>B.S. in Computer Science</p>
+            <span>Jan. 2023 &ndash; Dec. 2026 &middot; Augusta, GA</span>
+            <span style="margin-top:0.5rem;display:block;color:var(--grey);font-size:0.76rem;line-height:1.5;">Relevant Coursework: Software Engineering, Artificial Intelligence, Data Structures, Linear Algebra, Operating Systems</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section experience" id="experience">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <div class="timeline">
+
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__date">Sep. 2026 &ndash; Present</div>
+          <div class="timeline__card">
+            <div class="timeline__header">
+              <h3>AI Content &amp; Research Student Assistant</h3>
+              <span class="timeline__org">Augusta University</span>
+              <span class="timeline__location">Augusta, GA</span>
+            </div>
+            <ul>
+              <li>Researching AI applications, ethics, and emerging technologies to support a university-wide Open Educational Resource on AI, humanity, and education.</li>
+              <li>Collaborating with faculty and university staff to develop and evaluate accessible AI-focused educational content.</li>
+            </ul>
+            <div class="timeline__tags"><span>AI Research</span><span>Education</span><span>Content Development</span></div>
+          </div>
+        </div>
+
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__date">Jan. 2026 &ndash; Jun. 2026</div>
+          <div class="timeline__card">
+            <div class="timeline__header">
+              <h3>Applied AI Research Intern</h3>
+              <span class="timeline__org">Georgia Cyber Innovation &amp; Training Center &mdash; Augusta University</span>
+              <span class="timeline__location">Augusta, GA</span>
+            </div>
+            <ul>
+              <li>Developed and evaluated Edge AI models for 3D point-cloud completion and audio aliasing detection using Python, PyTorch, and Spiking Neural Networks.</li>
+              <li>Built training and evaluation pipelines, compared model architectures across datasets, and analyzed performance using metrics including F1, precision, recall, Chamfer Distance, and EMD.</li>
+              <li>Contributed to collaborative research projects submitted for academic publication.</li>
+            </ul>
+            <div class="timeline__tags"><span>Edge AI</span><span>SNN</span><span>PyTorch</span><span>spikingjelly</span><span>Python</span><span>Git</span></div>
+          </div>
+        </div>
+
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__date">Jun. 2025 &ndash; Aug. 2025</div>
+          <div class="timeline__card">
+            <div class="timeline__header">
+              <h3>Application Developer Intern</h3>
+              <span class="timeline__org">Union Agener &mdash; Animal Health Biotechnology</span>
+              <span class="timeline__location">Augusta, GA</span>
+            </div>
+            <ul>
+              <li>Co-developed an internal web application supporting daily operations across maintenance, warehouse, quality, and production teams.</li>
+              <li>Built user-facing guides using HTML to simplify SAP process workflows for non-technical staff.</li>
+              <li>Designed visual dashboards to present operational data, integrating AI tools to improve reporting quality and user experience.</li>
+              <li>Worked with SQL databases to organize system data and integrate AI-powered functionality.</li>
+              <li>Supported IT operations by assisting with ticket workflows and identifying process improvements.</li>
+            </ul>
+            <div class="timeline__tags"><span>HTML</span><span>SQL</span><span>Dashboards</span><span>SAP</span></div>
+          </div>
+        </div>
+
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__date">Aug. 2023 &ndash; Dec. 2025</div>
+          <div class="timeline__card">
+            <div class="timeline__header">
+              <h3>IT Support Specialist</h3>
+              <span class="timeline__org">Augusta University Information Technology</span>
+              <span class="timeline__location">Augusta, GA</span>
+            </div>
+            <ul>
+              <li>Installed, configured, and maintained operating systems, software applications, and security patches across desktops and laptops.</li>
+              <li>Managed IT service tickets via ServiceNow, ensuring accurate documentation and timely resolution.</li>
+              <li>Provided technical support to faculty, staff, and students across a wide range of technology questions and issues.</li>
+              <li>Assisted with device collection, executing data wiping and backup procedures to protect user privacy.</li>
+            </ul>
+            <div class="timeline__tags"><span>ServiceNow</span><span>IT Support</span><span>Windows</span><span>Networking</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section projects" id="projects">
+    <div class="container">
+      <h2 class="section-title">Research &amp; Projects</h2>
+      <div class="projects__grid">
+
+        <div class="project-card">
+          <div class="project-card__accent"></div>
+          <div class="project-card__body">
+            <span class="project-card__date">Jul. 2026 &ndash; Present</span>
+            <h3>AI Patient Voice Simulator</h3>
+            <p>An AI-powered voice system that simulates realistic patient-provider phone conversations. Integrates Twilio for live calling and speech interaction with an LLM backend that maintains conversation context across multiple turns. Built a modular backend for webhooks, conversation state, configurable patient scenarios, transcript logging, and LLM-generated responses.</p>
+            <div class="project-card__tags"><span>Python</span><span>Flask</span><span>OpenAI API</span><span>Twilio</span><span>REST APIs</span></div>
+            <div class="project-card__links">
+              <a href="https://github.com/priscilandi/pgai-voice-bot-challenge" target="_blank" rel="noopener" class="project-btn project-btn--gh">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card__accent"></div>
+          <div class="project-card__body">
+            <span class="project-card__date">Mar. 2026</span>
+            <h3>Gesture Detector Pipeline</h3>
+            <p>A real-time hand gesture recognition app built with MediaPipe and machine learning. Detects landmarks including thumbs up, peace sign, open palm, and fist &mdash; achieving <strong>96.5% test accuracy</strong> from 281 usable samples.</p>
+            <div class="project-card__tags"><span>MediaPipe</span><span>scikit-learn</span><span>Computer Vision</span><span>Python</span></div>
+            <div class="project-card__links">
+              <a href="https://github.com/priscilandi/hand-gesture-recognition" target="_blank" rel="noopener" class="project-btn project-btn--gh">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card__accent"></div>
+          <div class="project-card__body">
+            <span class="project-card__date">Aug. &ndash; Dec. 2025</span>
+            <h3>Face vs. Logo Image Classifier</h3>
+            <p>A classifier pipeline that distinguishes human faces from graphic logos by combining classical image features with deep neural network checks. Includes ensemble voting to reduce false positives, plus data hygiene tooling for training stability.</p>
+            <div class="project-card__tags"><span>DNN</span><span>Ensemble</span><span>Python</span><span>Image Classification</span></div>
+            <div class="project-card__links">
+              <a href="https://github.com/priscilandi/face-vs-logo-detector" target="_blank" rel="noopener" class="project-btn project-btn--gh">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card__accent"></div>
+          <div class="project-card__body">
+            <span class="project-card__date">Aug. &ndash; Dec. 2025</span>
+            <h3>Vulnerability Visualization Dashboard</h3>
+            <p>A full-stack web dashboard built with PHP to explore CVEs by vendor, year, severity, and software type. Implemented server-side filtering and optimized SQL joins to improve query latency and accessibility for non-technical stakeholders.</p>
+            <div class="project-card__tags"><span>PHP</span><span>SQL</span><span>Full-Stack</span><span>Data Viz</span><span>CVE</span></div>
+            <div class="project-card__links">
+              <a href="https://github.com/priscilandi/cve-visualization-dashboard" target="_blank" rel="noopener" class="project-btn project-btn--gh">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery__grid">
+
+        <div class="gallery__item" data-caption="Office during the Summer 2025 Internship at Union Agener">
+          <img src="assets/images/union-agener-office.jpg" alt="Office at Union Agener internship" loading="lazy" />
+          <div class="gallery__overlay"><p>Office during the Summer 2025 Internship at Union Agener</p></div>
+        </div>
+
+        <div class="gallery__item gallery__item--wide" data-caption="Final Internship Presentation at Union Agener">
+          <img src="assets/images/union-agener-presentation.jpg" alt="Final internship presentation at Union Agener" loading="lazy" />
+          <div class="gallery__overlay"><p>Final Internship Presentation at Union Agener</p></div>
+        </div>
+
+        <div class="gallery__item" data-caption="MVP of Augusta University Women&rsquo;s Tennis &mdash; 2025">
+          <img src="assets/images/tennis-mvp-award.jpg" alt="MVP award at Augusta University Women's Tennis 2025" loading="lazy" />
+          <div class="gallery__overlay"><p>MVP of Augusta University Women&rsquo;s Tennis &mdash; 2025</p></div>
+        </div>
+
+        <div class="gallery__item gallery__item--cert" data-caption="Kaggle Certificate &mdash; Computer Vision (Sep. 2025)">
+          <img src="assets/images/cert-computer-vision.png" alt="Kaggle Computer Vision certificate" loading="lazy" />
+          <div class="gallery__overlay"><p>Kaggle Certificate &mdash; Computer Vision</p></div>
+        </div>
+
+        <div class="gallery__item gallery__item--cert" data-caption="Kaggle Certificate &mdash; Intermediate Machine Learning (Sep. 2025)">
+          <img src="assets/images/cert-intermediate-ml.png" alt="Kaggle Intermediate Machine Learning certificate" loading="lazy" />
+          <div class="gallery__overlay"><p>Kaggle Certificate &mdash; Intermediate Machine Learning</p></div>
+        </div>
+
+        <div class="gallery__item" data-caption="Playing tennis for Augusta University">
+          <img src="assets/images/tennis-action.jpg" alt="Playing tennis for Augusta University" loading="lazy" />
+          <div class="gallery__overlay"><p>Playing tennis for Augusta University</p></div>
+        </div>
+
+        <div class="gallery__item" data-caption="President&rsquo;s List &mdash; Augusta University">
+          <img src="assets/images/presidents-list-award.jpg" alt="President's List award at Augusta University" loading="lazy" />
+          <div class="gallery__overlay"><p>President&rsquo;s List &mdash; Augusta University</p></div>
+        </div>
+
+        <div class="gallery__item gallery__item--cert" data-caption="Kaggle Certificate &mdash; Pandas (Sep. 2025)">
+          <img src="assets/images/cert-pandas.png" alt="Kaggle Pandas certificate" loading="lazy" />
+          <div class="gallery__overlay"><p>Kaggle Certificate &mdash; Pandas</p></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
+      <button class="lightbox__prev"  id="lightboxPrev"  aria-label="Previous">&#8592;</button>
+      <button class="lightbox__next"  id="lightboxNext"  aria-label="Next">&#8594;</button>
+      <div class="lightbox__content">
+        <img src="" alt="" id="lightboxImg" />
+        <p id="lightboxCaption"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section class="section awards" id="awards">
+    <div class="container">
+      <h2 class="section-title">Awards &amp; Activities</h2>
+      <div class="awards__grid">
+        <div class="award-card">
+          <div class="award-card__icon">🎾</div>
+          <h4>MVP &amp; Team Leader</h4>
+          <p>Augusta University Women&rsquo;s Tennis &mdash; Aug. 2023 to May 2026</p>
+        </div>
+        <div class="award-card">
+          <div class="award-card__icon">📋</div>
+          <h4>President&rsquo;s List</h4>
+          <p>Augusta University &mdash; Aug. 2025 to May 2026</p>
+        </div>
+        <div class="award-card">
+          <div class="award-card__icon">🎓</div>
+          <h4>Division II Student-Athlete</h4>
+          <p>Augusta University Women&rsquo;s Tennis Team &mdash; January 2023 to present</p>
+        </div>
+        <div class="award-card">
+          <div class="award-card__icon">🇦🇷</div>
+          <h4>Top 20 National Junior Tennis Ranking &mdash; Argentina</h4>
+          <p>Competed nationally and internationally from 2016&ndash;2022.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="container contact__inner">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="contact__sub">Open to research collaborations, internship opportunities, and conversations about AI, tennis, or anything in between.</p>
+      <div class="contact__links">
+        <a href="mailto:priscilandi@hotmail.com" class="contact__link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          priscilandi@hotmail.com
+        </a>
+        <a href="tel:+17063067340" class="contact__link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +1 706 306 7340
+        </a>
+        <a href="https://www.linkedin.com/in/priscilla-landi-711399344/" target="_blank" rel="noopener" class="contact__link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/priscilandi" target="_blank" rel="noopener" class="contact__link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <p class="contact__location">&#128205; Augusta, GA 30909</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Priscilla Landi &copy; 2026</span>
+      <span>Augusta, GA &middot; Computer Science &middot; Tennis</span>
+    </div>
+  </footer>
+
+  <script>
+/* ── NAV scroll effect ──────────────────────────────────────── */
+const nav    = document.getElementById('nav');
+const burger = document.getElementById('burger');
+const menu   = document.getElementById('mobileMenu');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+burger.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    menu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+
+/* ── LIGHTBOX ───────────────────────────────────────────────── */
+const lightbox    = document.getElementById('lightbox');
+const lbImg       = document.getElementById('lightboxImg');
+const lbCaption   = document.getElementById('lightboxCaption');
+const lbClose     = document.getElementById('lightboxClose');
+const lbPrev      = document.getElementById('lightboxPrev');
+const lbNext      = document.getElementById('lightboxNext');
+
+// Only include gallery items that actually have a loaded image
+const galleryItems = Array.from(document.querySelectorAll('.gallery__item')).filter(item => {
+  const img = item.querySelector('img');
+  return img && img.src && !img.src.endsWith('#');
+});
+
+let current = 0;
+
+function openLightbox(idx) {
+  current = idx;
+  const item   = galleryItems[idx];
+  const img    = item.querySelector('img');
+  lbImg.src    = img.src;
+  lbImg.alt    = img.alt;
+  lbCaption.textContent = item.dataset.caption || '';
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  lbImg.src = '';
+}
+
+function step(dir) {
+  current = (current + dir + galleryItems.length) % galleryItems.length;
+  openLightbox(current);
+}
+
+galleryItems.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
+
+lbClose.addEventListener('click', closeLightbox);
+lbPrev.addEventListener('click',  e => { e.stopPropagation(); step(-1); });
+lbNext.addEventListener('click',  e => { e.stopPropagation(); step(+1); });
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape')     closeLightbox();
+  if (e.key === 'ArrowLeft')  step(-1);
+  if (e.key === 'ArrowRight') step(+1);
+});
+
+/* ── SCROLL REVEAL ──────────────────────────────────────────── */
+const revealTargets = document.querySelectorAll(
+  '.timeline__item, .project-card, .award-card, .gallery__item, .stat, .edu-card, .about__text p'
+);
+
+revealTargets.forEach((el, i) => {
+  el.classList.add('reveal');
+  el.style.transitionDelay = `${(i % 5) * 0.06}s`;
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+revealTargets.forEach(el => observer.observe(el));
+
+  </script>
+</body>
+</html>
